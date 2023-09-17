@@ -16,8 +16,8 @@ Future<void> generate({String? yamlPath, String? modelFilePath}) async {
     return;
   }
 
-  final YamlMap yaml = loadYaml(await yamlFile.readAsString());
-  if (yaml.isEmpty) {
+  final YamlMap? yaml = loadYaml(await yamlFile.readAsString());
+  if (yaml == null) {
     print('models.yaml is empty');
     return;
   }

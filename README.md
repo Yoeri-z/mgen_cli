@@ -5,7 +5,7 @@ Define your models in a yaml file and in one command it will generate the models
 ## usage
 This is how you can set up you project:
 - run ```dart pub global activate mgen_cli``` in the terminal.
-- add a model.yaml file to your project root folder and specify your models (see [defining models](#defining-models)).
+- add a file named models.yaml to your project root folder and specify your models (see [defining models](#defining-models)).
 - open a terminal in your project's root folder and run ```mgen generate ```.
 
 Optionally you can use the ```-m``` flag to define an exact file in which to write the models and the ```-y``` flag to define the yaml file location:
