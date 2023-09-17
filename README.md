@@ -19,7 +19,7 @@ to define a model, give the model name and give it some fields. This is done in 
 User:
   email: String
   username: String
-  age: Int
+  age: int
 ```
 
 You can give fields these types: bool, double, int, String and DateTime, aswell as Lists or maps of these types.
@@ -36,3 +36,17 @@ Location:
   city: String
 ```
 If there are any errors inside the modelfile this is most likely because you defined a not allowed type.
+
+If you want to customize the generated model it is recommended to do it like this:
+```dart
+extension CopyWith on User {
+  ///copy this user with altered values
+  User copyWith({String? newEmail, String? newusername, int? newage}) {
+    return User(
+        email: newEmail ?? email,
+        username: newusername ?? username,
+        age: newage ?? age);
+  }
+}
+```
+because all changes in the model file will be erased whenever a new generation happens.

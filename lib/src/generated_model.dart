@@ -42,7 +42,7 @@ class GeneratedModel {
   //write the base of the model
   String _base(String classTemplate, StringBuffer buffer) {
     for (int i = 0; i < _names.length; i++) {
-      buffer.writeln('\t${_typeList[i]} ${_names[i]};');
+      buffer.writeln('\tfinal ${_typeList[i]} ${_names[i]};');
     }
     classTemplate = classTemplate.replaceFirst('vars', buffer.toString());
     buffer.clear();

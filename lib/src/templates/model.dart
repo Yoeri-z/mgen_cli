@@ -2,7 +2,7 @@ const modelTemplate = '''
 class class_name implements Model {
 vars
 
-  class_name({
+  const class_name({
 reqs
   });
 
