@@ -1,7 +1,7 @@
 name: mgen_cli
 description: A sample command-line application.
 version: 1.0.0
-repository: https://github.com/Yoeri-z/model_generator
+repository: https://github.com/Yoeri-z/mgen_cli
 executables:
   mgen: model_generator
 environment:
