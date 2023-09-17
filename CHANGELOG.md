@@ -1,3 +1,6 @@
+## 1.0.3
+- updated readme
+
 ## 1.0.2
 - updated readme
 - updated inline documentation of the models

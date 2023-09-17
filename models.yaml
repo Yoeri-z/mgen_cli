@@ -1,4 +1,0 @@
-User:
-  email: String
-  username: String
-  age: int

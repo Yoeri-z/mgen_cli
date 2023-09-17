@@ -1,6 +1,6 @@
-# Model_generator
+# Mgen_cli
 ## introduction
-model generator is an easy to use command line tool that helps with making serializable models.
+mgen (model generator) is an easy to use command line tool that helps with making serializable models.
 Define your models in a yaml file and in one command it will generate the models for you
 ## usage
 This is how you can set up you project:
@@ -12,6 +12,8 @@ Optionally you can use the ```-m``` flag to define an exact file in which to wri
 - ```mgen generate -m path/to/file/file.dart```
 - ```mgen generate -y path/to/yaml/file.yaml```
 - ```mgen generate -m path/to/file/file.dart -y path/to/yaml/file.yaml```
+
+the default directory for models.yaml is the root directory, the default directory for the model.dart file is the lib directory
 
 ## defining-models
 to define a model, give the model name and give it some fields. This is done in a yaml file like this:
@@ -41,11 +43,11 @@ If you want to customize the generated model it is recommended to do it like thi
 ```dart
 extension CopyWith on User {
   ///copy this user with altered values
-  User copyWith({String? newEmail, String? newusername, int? newage}) {
+  User copyWith({String? newEmail, String? newUsername, int? newAge}) {
     return User(
         email: newEmail ?? email,
-        username: newusername ?? username,
-        age: newage ?? age);
+        username: newUsername ?? username,
+        age: newAge ?? age);
   }
 }
 ```
