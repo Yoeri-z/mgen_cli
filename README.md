@@ -35,4 +35,4 @@ Location:
   street: String
   city: String
 ```
-If there are any errors inside the modelfile this is most likely because defined a not allowed type.
+If there are any errors inside the modelfile this is most likely because you defined a not allowed type.
