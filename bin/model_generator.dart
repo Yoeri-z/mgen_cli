@@ -18,8 +18,8 @@ void main(List<String> arguments) {
     return;
   }
   if (arguments.first == 'generate') {
-    int indexY = arguments.indexFirstWhere((e) => e == '-y');
-    int indexM = arguments.indexFirstWhere((e) => e == '-m');
+    int indexY = arguments.indexFirstWhere((e) => e.toLowerCase() == '-y');
+    int indexM = arguments.indexFirstWhere((e) => e.toLowerCase() == '-m');
     String? pathY;
     String? pathM;
     if (indexY >= 1 &&
