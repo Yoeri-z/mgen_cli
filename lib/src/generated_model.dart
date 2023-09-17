@@ -1,6 +1,6 @@
-import 'package:model_generator/src/templates/model.dart';
+import 'package:mgen_cli/src/templates/model.dart';
 import 'package:yaml/yaml.dart';
-import 'package:model_generator/model_generator.dart';
+import 'package:mgen_cli/model_generator.dart';
 
 class GeneratedModel {
   ///the name of the class

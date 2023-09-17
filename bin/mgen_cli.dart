@@ -1,4 +1,4 @@
-import 'package:model_generator/model_generator.dart' as model_generator;
+import 'package:mgen_cli/model_generator.dart' as model_generator;
 
 extension Index<T> on List<T> {
   int indexFirstWhere(bool Function(T e) test) {

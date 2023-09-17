@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:model_generator/src/templates/model_abstract.dart';
+import 'package:mgen_cli/src/templates/model_abstract.dart';
 import 'package:yaml/yaml.dart';
 
-import 'package:model_generator/src/generated_model.dart';
+import 'package:mgen_cli/src/generated_model.dart';
 
 late final List<String> modelTypes;
 
