@@ -30,7 +30,7 @@ void main(List<String> arguments) {
         !arguments[indexY + 1].startsWith('-')) {
       print("Please specify the path after -y");
     }
-    ;
+
     if (indexM >= 1 &&
         (indexM < arguments.length - 1 ||
             !arguments[indexM + 1].startsWith('-'))) {

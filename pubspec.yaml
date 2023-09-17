@@ -1,9 +1,9 @@
 name: mgen_cli
-description: A sample command-line application.
+description: An easy to use commandline tool to make serilization easier
 version: 1.0.0
 repository: https://github.com/Yoeri-z/mgen_cli
 executables:
-  mgen: model_generator
+  mgen: mgen_cli
 environment:
   sdk: ^3.0.3
 
