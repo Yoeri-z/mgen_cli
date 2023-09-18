@@ -1,3 +1,4 @@
+import 'package:mgen_cli/src/errors.dart';
 import 'package:mgen_cli/src/templates/model.dart';
 import 'package:yaml/yaml.dart';
 import 'package:mgen_cli/mgen_cli.dart';
@@ -24,8 +25,45 @@ class GeneratedModel {
 
   ///submite a field with a [fieldName] and [type] to the model
   void submit(String fieldName, String type) {
+    if (type.contains('?')) {
+      print(
+          'Warning: Nullable types are not allowed, please change the nullable type in your yaml file to something non-nullable, creating model without nullable type');
+      return;
+    }
     _typeList.add(type);
     _names.add(fieldName);
+  }
+
+  String parseString(String dataString, String type, bool toJson) {
+    if (modelTypes.contains(type)) {
+      return (toJson)
+          ? '$dataString.toJson(),'
+          : '$type.fromJson($dataString),';
+    } else if (type == 'DateTime') {
+      return (toJson)
+          ? '$dataString.toIso8601String(),'
+          : 'DateTime.parse($dataString),';
+    } else if (type.startsWith('List<')) {
+      final subtype = type.substring(type.indexOf("<") + 1, type.length - 1);
+      return (toJson)
+          ? '$dataString.map((e) => ${parseString('e', subtype, toJson)}).toList(),'
+          : '($dataString as List).map((e) => ${parseString('e', subtype, toJson)}).toList(),';
+    } else if (type.startsWith('Map<')) {
+      final mapTypes = type.substring(type.indexOf("<") + 1, type.length - 1);
+      final index = mapTypes.indexOf(',');
+      final mapTypeList = [
+        mapTypes.substring(0, index),
+        mapTypes.substring(index + 1)
+      ];
+      final keyType = mapTypeList[0].trim();
+      final valueType = mapTypeList[1].trim();
+      print(valueType);
+      return (toJson)
+          ? '$dataString.map((key, value) => MapEntry(${parseString('key', keyType, toJson)} ${parseString('value', valueType, toJson)})),'
+          : '($dataString as Map).map((key, value) => MapEntry(${parseString('key', keyType, toJson)} ${parseString('value', valueType, toJson)})),';
+    } else {
+      return (toJson) ? '$dataString,' : '$dataString,';
+    }
   }
 
   //get the values out of the yamlmap
@@ -47,7 +85,7 @@ class GeneratedModel {
     classTemplate = classTemplate.replaceFirst('vars', buffer.toString());
     buffer.clear();
     for (String name in _names) {
-      buffer.write('\t\trequired this.$name, ');
+      buffer.writeln('\t\trequired this.$name, ');
     }
     return classTemplate.replaceFirst('reqs', buffer.toString());
   }
@@ -55,24 +93,30 @@ class GeneratedModel {
   //write the tojson function of the model
   String _toJson(String classTemplate, StringBuffer buffer) {
     for (int i = 0; i < _names.length; i++) {
-      if (modelTypes.contains(_typeList[i])) {
-        buffer.write('\t\t\t"${_names[i]}": ${_names[i]}.toJson(),');
-      } else {
-        buffer.writeln('\t\t\t"${_names[i]}": ${_names[i]},');
-      }
+      buffer.writeln(
+          '\t\t\t"${_names[i]}" : ${parseString(_names[i], _typeList[i], true)}');
     }
     return classTemplate.replaceFirst('tojson', buffer.toString());
+  }
+
+  String _copyWith(String classTemplate, StringBuffer buffer) {
+    for (int i = 0; i < _names.length; i++) {
+      buffer.writeln('\t\t\t${_typeList[i]}? ${_names[i]},');
+    }
+    classTemplate =
+        classTemplate.replaceFirst('optionparams', buffer.toString());
+    buffer.clear();
+    for (int i = 0; i < _names.length; i++) {
+      buffer.writeln('\t\t\t${_names[i]} : ${_names[i]} ?? this.${_names[i]},');
+    }
+    return classTemplate.replaceFirst('copywith', buffer.toString());
   }
 
   //write the fromJson function of the model
   String _fromJson(String classTemplate, StringBuffer buffer) {
     for (int i = 0; i < _names.length; i++) {
-      if (modelTypes.contains(_typeList[i])) {
-        buffer.writeln(
-            '\t\t\t${_names[i]}: ${_typeList[i]}.fromJson(json["${_names[i]}"]),');
-      } else {
-        buffer.writeln('\t\t\t${_names[i]}: json["${_names[i]}"],');
-      }
+      buffer.writeln(
+          '\t\t\t${_names[i]} : ${parseString('json["${_names[i]}"]', _typeList[i], false)}');
     }
     return classTemplate.replaceFirst('fromjson', buffer.toString());
   }
@@ -85,6 +129,8 @@ class GeneratedModel {
     classTemplate = _base(classTemplate, buffer);
     buffer.clear();
     classTemplate = _toJson(classTemplate, buffer);
+    buffer.clear();
+    classTemplate = _copyWith(classTemplate, buffer);
     buffer.clear();
     classTemplate = _fromJson(classTemplate, buffer);
     buffer.clear();
