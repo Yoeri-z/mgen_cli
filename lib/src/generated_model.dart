@@ -33,6 +33,8 @@ class GeneratedModel {
     _names.add(fieldName);
   }
 
+  /// parse the string representing the variable for the data to [dataString], the String representing
+  /// the type to [type] and the boolean defining wether it is from or to json to [toJson]
   String parseString(String dataString, String type, bool toJson) {
     if (modelTypes.contains(type)) {
       return (toJson)

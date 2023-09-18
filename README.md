@@ -78,13 +78,15 @@ void main() {
   const ernie =
       Person(name: "Ernie", age: 29, livesAt: locationErnie, friends: []);
   //define the person bert
-  //since ernie already exists we could make bert friends with ernie, but ernie and bert just met and they are not friends yet
+  //since ernie already exists we could make bert friends with ernie, 
+  //but ernie and bert just met and they are not friends yet
   const bert =
       Person(name: "Bert", age: 34, livesAt: locationBert, friends: []);
 
   //because Ernie thinks Bert is a nice person, Ernie wants bert as a friend
   //We can do this but because of immutability we have to copy ernie with new friends
-  //note that this value can not be constant since copyWith is a function and we dont know its value from beforehand
+  //note that this value can not be constant since copyWith is a function 
+  //and we dont know its value beforehand
   final ernieWithFriends = ernie.copyWith(friends: [bert]);
 
   //we can convert the object into a json
@@ -119,8 +121,10 @@ void main() {
       }
   */
 
-  //we can construct persons from serialized jsons, if the json is correct this will not cause any errors
-  //(in this script it is obviously correct but in more complex situations this might be harder to ensure)
+  //we can construct persons from serialized maps, 
+  //if the json is correct this will not cause any errors
+  //(in this script it is obviously correct 
+  //but in more complex situations this might be harder to ensure)
   final ernieReconstructed = Person.fromJson(json);
   print(ernieReconstructed.name);
   //this will print: "Ernie"
