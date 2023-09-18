@@ -63,7 +63,7 @@ class GeneratedModel {
           ? '$dataString.map((key, value) => MapEntry(${parseString('key', keyType, toJson)} ${parseString('value', valueType, toJson)})),'
           : '($dataString as Map).map((key, value) => MapEntry(${parseString('key', keyType, toJson)} ${parseString('value', valueType, toJson)})),';
     } else {
-      return (toJson) ? '$dataString,' : '$dataString,';
+      return (toJson) ? '$dataString,' : '$dataString as $type,';
     }
   }
 

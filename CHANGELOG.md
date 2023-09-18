@@ -1,3 +1,6 @@
+## 1.1.2
+- fixed a bug where the generated script would not cast dynamic types to specific types
+
 ## 1.1.1
 - readme didnt save so this is only a readme update
 
