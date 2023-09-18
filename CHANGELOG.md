@@ -1,3 +1,6 @@
+## 1.1.1
+- readme didnt save so this is only a readme update
+
 ## 1.1.0
 - classes are now immutable
 - added support for more complex data types, you can now also define types like this ```Map<User, List<Map<User, Message>>>```

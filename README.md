@@ -35,15 +35,15 @@ Location:
   street: String
   city: String
 ```
-If there are any errors inside the modelfile this is most likely because you defined a not allowed type. Support to add you own types will come in the future.
+If there are any errors inside the model file this is most likely because you submitted a type that is not allowed. Support to add custom types will come in the future.
 
 ## the models
 All generated models will have the following features
 - They are immutable take a look at [this medium article](https://medium.flutterdevs.com/explore-immutable-data-structures-in-dart-flutter-86c350b7d014) if you want to learn more about immutability
-- They have a default constructor, all the fields are required when constructing.
-- They have a ```Model.fromJson(json)``` constructor which takes a serialized Map (I.E Map<String, dynamic>) and tries to parse it into the specified Model
-- They have a ```toJson()``` method, which convert the object into a seialized Map
-- They have a ```copyWith()``` method, which takes any of the object fields and copies it with that field altered. This function is especially usefull because the models are immutable
+- They have a default constructor.
+- They have a ```Model.fromJson(json)``` constructor which takes a serialized Map (I.E  ```Map<String, dynamic>```) and tries to parse it into the specified Model
+- They have a ```toJson()``` method, which converts the object into a serialized Map
+- They have a ```copyWith()``` method, which takes any of the object fields and copies it with those fields altered. This function is especially usefull because the models are immutable
 
 Here is an example demonstrating these features:
 
@@ -138,5 +138,7 @@ extension ShowFriends on Person{
   }
 }
 ```
+
+You can take a look at the generated model file and see how the models are written for a better understanding of how they work.
 
 The sourcecode for this package can be found on [the mgen_cli github page](https://github.com/Yoeri-z/mgen_cli)
