@@ -1,4 +1,5 @@
 const modelTemplate = '''
+@immutable
 class class_name implements Model<class_name> {
 vars
 

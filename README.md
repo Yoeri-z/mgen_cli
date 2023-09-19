@@ -74,19 +74,13 @@ void main() {
       Location(hourseNr: 2, street: "Sesame Street", city: "Sesame City");
 
   //define the person Ernie
-  //note that we can not give ernie any friends since he is the first person created
   const ernie =
       Person(name: "Ernie", age: 29, livesAt: locationErnie, friends: []);
   //define the person bert
-  //since ernie already exists we could make bert friends with ernie, 
-  //but ernie and bert just met and they are not friends yet
   const bert =
       Person(name: "Bert", age: 34, livesAt: locationBert, friends: []);
 
-  //because Ernie thinks Bert is a nice person, Ernie wants bert as a friend
-  //We can do this but because of immutability we have to copy ernie with new friends
-  //note that this value can not be constant since copyWith is a function 
-  //and we dont know its value beforehand
+  //If we want to alter the friends of ernie we can do it like this.
   final ernieWithFriends = ernie.copyWith(friends: [bert]);
 
   //we can convert the object into a json
